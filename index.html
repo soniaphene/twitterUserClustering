@@ -1,0 +1,209 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 4: Visualization</title>
+</head>
+<style>
+.link {
+  stroke: #ccc;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+ul {
+  display:inline-block;
+  float:left;
+}
+p {
+  clear: both;
+}
+</style>
+<body>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="page-header center">
+                <h1>Part 3: <small>K-means Clustering</small></h1>
+            </div>
+
+              
+            <h2>Clustering different types of twitter users</h2>
+            <p> In this assignment, I used k-means to cluster different types of twitter users together. I selected 52 Twitter users (all of whom had tweeted at least 300 times) from five distinct groupings: comedians, athletes, musicians, news agencies, and US Politicians. I had at least ten users in each group. I first retrieved 300 of their tweets and concatenated the text together to use as my features. I used a tokenizer to parse this text (ex. strip punctuation, get rid of unnecessary stop words, etc.) and count the frequencies of each term. My k-means model (I used the one from the scikit learn module) used these term counts as features and predicted groupings (the k-means model relies on an Euclidean distance function). I also then took five test users, one from each category, and had my kmeans model predict their clusters.  </p>
+            <h2> Visualization of clusters </h2>
+            <div id="viz"> </div>
+			<p> The graph above shows the different clusters. Each color represents a different cluster or grouping. The larger nodes are the test users and the smaller ones are just ones used in training. The center node of each group is the user with the most followers. You can click and drag the clusters or nodes around, and hovering on a node will display the username for it.</p>
+      <h2> Comparing Clusters</h2>
+      <p> Below are the actual categories for the data with the test user (which was not included in the training of my classifier) shown in italics.
+      <ul> <strong>Musicians</strong>
+<li>katyperry</li>
+<li>justinbieber</li>
+<li>ladygaga</li>
+<li>taylorswift13</li>
+<li>britneyspears</li>
+<li>rihanna</li>
+<li>jtimberlake</li>
+<li>shakira</li>
+<li>Pink</li>
+<li>selenagomez</li>
+<li>aliciakeys</li>
+<li>MileyCyrus</li>
+<li><em>Eminem</em></li></ul>
+<ul><strong>US Politicians</strong>
+<li>BarackObama</li>
+<li>JoeBiden</li>
+<li>johnboehner</li>
+<li>SenJohnMcCain</li>
+<li>GovernorPerry</li>
+<li>NancyPelosi</li>
+<li>HillaryClinton</li>
+<li>Schwarzenegger</li>
+<li>MittRomney</li>
+<li>GovChristie</li>
+<li><em>MikeBloomberg</em></li> </ul>
+<ul> <strong>Comedians</strong>
+<li>jimmyfallon</li>
+<li>ConanOBrien</li>
+<li>danieltosh</li>
+<li>TheEllenShow</li>
+<li>mindykaling</li>
+<li>SteveMartinToGo</li>
+<li>SarahKSilverman</li>
+<li>rainnwilson</li>
+<li>chelsealately</li>
+<li><em>mrdavehill</em></li></ul>
+<ul><strong>News Agencies</strong>
+<li>cnnbrk</li>
+<li>nytimes</li>
+<li>BBCBreaking</li>
+<li>ReutersAgency</li>
+<li>FoxNews</li>
+<li>NBCNews</li>
+<li>WSJ</li>
+<li>washingtonpost</li>
+<li>CBSNews</li>
+<li>SkyNews</li>
+<li>abcnews</li>
+<li><em>latimes</em></li></ul>
+<ul><strong>Athletes</strong>
+<li>KingJames</li>
+<li>tbrady14</li>
+<li>JoeMontana</li>
+<li>kobebryant</li>
+<li>MagicJohnson</li>
+<li>WayneRooney</li>
+<li>TigerWoods</li>
+<li>DangeRussWilson</li>
+<li>FloydMayweather</li>
+<li>KDTrey5</li>
+<li><em>MiaHamm</em></li>
+ </ul>
+			<p>I chose the above screen names by trying to select distinct categories that are totally separate. I chose groups that I thought would be focuse on different things: the agencies on news, musicians on promoting their songs, athletes on games, politicians on their policies, and comedians on making jokes. I aimed to choose categories that I believed were disjoint in that there isn't a politician who is also an athlete. However, upon further reflection, many of my users had similar tweets. I found that "celebrities" had very similar tweets since they often tweeted about their everyday lives. This category spans comedians, musicians, and athletes.   </p>
+      <p> Looking at the above tweets, it is apparent that my clusterer worked differently than I had expected but it still performed quite reasonably. </p>
+      <p> Looking at the green cluster, I find that the grouping seems to be very reasonable (with the exception of the surprising user of Selena Gomez). As seen above, most of the users are news agencies who are tweeting news. The central user is Barack Obama, which makes a lot of sense since as president, he will often post news of the nation. The tweets below are very similar and as humans we can see that they are quite close</p>
+      <pre>Barack Obama's tweets
+      Watch: In his weekly address, President Obama discusses the importance of a budget that builds economic opportunity. http://ofa.bo/dSl
+      Great news: Thanks to the #ACA, 3 million more Americans were covered through Medicaid as of March 1st → http://go.wh.gov/hwy7vN  #GetCovered
+      FACT: Droughts in the southwest U.S. are expected to last over 5 years by 2050. It's time to #ActOnClimate.
+      "Members of Congress have a fresh chance to show which side they are on." —President Obama on the upcoming vote to #RaiseTheWage
+       </pre>
+       <pre>Tweets from news agencies
+       New report finds that 9 million are newly insured under Obamacare http://nbcnews.to/1gIMAgH
+       Will talk help bridge the gender pay gap? http://nbcnews.to/1eo9eej
+       President Obama signs 2 executive actions targeting unequal pay between men and women.http://on.wsj.com/1knUTqt
+       Sec. of State Kerry sharpens criticism of Moscow, blaming "Russian provocateurs" for growing unrest in Ukraine. http://on.wsj.com/1lO0pSP</pre>
+       <p> Not all of my clusters were grouped as neatly as I had planned, but based on the tweets I realized that these groupings were reasonable. The red cluster for example was mostly singers. The purple cluster was mostly comedians with many atheletes mixed in and a couple singers. The yellow cluster was the largest mix spanning from politicians to musicians to athletes. The last blue cluster was sort of a "catch-all" cluster for the odd ones out that didn't particularly fit into any cluster. My five test cases also similarly clustered but went to different parts. </p>
+       <p> Though my yellow cluster for example was a jumble of different categories. The tweets from these users often contained tweets about everyday life or events they attended. While the events surely differed, this was harder to discriminate between. The example tweets below show how it makes sense that these were grouped together.</p>
+       <pre>Katy Perry, IF you would like to see my sisters amazing face/pose get #BIRTHDAY trending to the top & I will UNLOCK the genius with you... Hahahahahaha
+        Well, that explains what happened to my iPad! RT @BillClinton: I'm following my leader! pic.twitter.com/uxRSkP9yNl
+        Happy B-day to my homie @Pharrell! We'll celebrate when u back in Miami fam. Enjoy and live it up HAPPY! ;-)</pre>
+       <p> Finally, it is interesting to note that the use of comedians may have skewed my clusters. Often times, these users will post sarcastic comments or otherwise use the nuances of English to make something funny. From a computational linguistics standpoint, sarcasm is a lot harder to capture. Some example tweets below show this. In that regard, it makes sense that my tweets were grouped in the manner they were. </p>
+       <pre>Ellen Degeneres, That's the one "What was the movie with the guy where he has a thing & he figures something out but it's too late?" @MY921Regina: Titanic?"
+        Jimmy Fallon, Diddy is changing his name back to Puff Daddy. So congrats, Mom – you’re calling him the right name again! #fallonmono
+        Mindy Kaling, East coast! Keep that TV on like a latchkey kid whose parents forgot about him! Another BRAND NEW episode of #TheMindyProject in 2 minutes!</pre>
+        <div class="col-md-2"></div>
+    </div>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+	<script>
+  //note: code from http://bl.ocks.org/mbostock/950642 was taken and modified for the purposes of this assignment
+    var width = 1000,height = 800
+
+var svg = d3.select("#viz").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var force = d3.layout.force()
+    .gravity(.05)
+    .distance(100)
+    .charge(-150)
+    .size([width, height]);
+
+d3.json("graph.json", function(error, json) {
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(json.links)
+    .enter().append("line")
+      .attr("class", "link");
+
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+    .enter()
+      .append("g")
+        .attr("class", "node")
+      .call(force.drag);
+      
+
+  node.append("circle")
+      .attr("cx", -8)
+      .attr("cy", -8)
+      .attr("r",function(d) { return d.size;})
+      .attr("fill",function(d){ 
+        switch(d.group){
+            case 0:
+                return "green";
+                break;
+            case 1:
+                return "purple";
+                break;
+            case 2:
+                return "red";
+                break;
+            case 3:
+                return "blue";
+                break;
+            case 4:
+                return "yellow";
+                break;
+        }
+       })
+      .append("title") //adds the hovering effect
+            .text(function(d){ return d.screen_name; });
+
+  node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.name });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+});
+
+</script>
+
+</body>
+</html>
